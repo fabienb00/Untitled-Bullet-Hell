@@ -5,7 +5,7 @@ using static Bullet;
 
 public class Talisman : Bullet
 {
-    private int damage = -1;
+    private int damage = -5;
 
     private void OnTriggerEnter(Collider other)
     {

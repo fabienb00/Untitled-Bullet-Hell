@@ -114,6 +114,9 @@ public class PlayerController : MonoBehaviour
         currentHealth = data.currentHealth;
         lives = data.lives;
 
+        healthBar.setHealth(currentHealth);
+        healthBar.adaptLives(lives);
+
         transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
     }
 }
