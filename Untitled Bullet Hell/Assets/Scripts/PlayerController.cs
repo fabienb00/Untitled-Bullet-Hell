@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Here I set up the health logic.
+    private int maxHealth = 100;
+    private int currentHealth = 100;
+    private int lives = 3;
+    public HealthUIScript healthBar;
+    private int invFrames;      //These will be set to sixty each time the player is hit to give them a grace period of one second between hits.
 
     private float moveSpeed = 30f;
 
@@ -27,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         shotTimer = constShotTimer;
+        healthBar.changeMaxHealth(maxHealth);
+        healthBar.adaptLives(lives);
     }
 
     // Update is called once per frame
@@ -48,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (shotTimer != 0) shotTimer--;
+        if (invFrames != 0) invFrames--;
     }
 
     private void shootBullet()
@@ -58,5 +67,31 @@ public class PlayerController : MonoBehaviour
         Instantiate(talismanPrefab, (transform.position + transform.forward * 1 - transform.up * 1 - transform.right * 0.5f), this.transform.rotation);
 
         shotTimer = constShotTimer;
+    }
+
+    public void changeHealth(int amount)
+    {
+        if (invFrames == 0)
+        {
+            currentHealth += amount;
+            invFrames = 60;    //Here is where I set the invFrames.
+            if(currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            else if(currentHealth <= 0)
+            {
+                currentHealth = maxHealth;
+                lives--;
+                healthBar.adaptLives(lives);
+            }
+            if(lives == 0)
+            {
+                //This is where the game over would be triggered.
+                //TO_DO: Implement Game Over sequence and code.
+            }
+            healthBar.setHealth(currentHealth);
+        }
+        
     }
 }

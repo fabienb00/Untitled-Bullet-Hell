@@ -1,24 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Pattern;
 
-public class TestPattern : MonoBehaviour
+public class TestPattern : Pattern
 {
-    public GameObject bulletPrefab;
-
-    public float constShotTimer; //This makes it so bullets are fired every shotTimer/60 seconds.
-    private float shotTimer;
-
-    private Quaternion shotRotation;
     private Quaternion inverseShotRotation;
 
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
-        shotRotation = this.transform.rotation;
+        base.Start();
         inverseShotRotation = this.transform.rotation;
         inverseShotRotation.eulerAngles = -shotRotation.eulerAngles;
-        shotTimer = constShotTimer;
     }
 
     // Update is called once per frame
@@ -26,7 +20,7 @@ public class TestPattern : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
+    override public void shoot()
     {
         if (shotTimer != 0) shotTimer--;
         if (shotTimer == 0)
@@ -53,6 +47,7 @@ public class TestPattern : MonoBehaviour
             shotTimer = constShotTimer;
         }
     }
+
     void addRotation(Vector3 add)
     {
         shotRotation.eulerAngles += add;

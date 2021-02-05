@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bulletBarrierTriggerScript : MonoBehaviour
+public class BulletBarrierTriggerScript : MonoBehaviour
 {
     private BoxCollider bc;
 
