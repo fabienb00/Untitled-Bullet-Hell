@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Here I set up the health logic.
-    private int maxHealth = 100;
-    private int currentHealth = 100;
-    private int lives = 3;
+    public int maxHealth = 100;
+    public int currentHealth = 100;
+    public int lives = 3;
     public HealthUIScript healthBar;
     private int invFrames;      //These will be set to sixty each time the player is hit to give them a grace period of one second between hits.
 
@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public string focusButton = "left shift"; //string value of the key that must be pressed to focus.
     public KeyCode shotButton = KeyCode.Mouse0; //string value of the key that must be held to shoot.
     public KeyCode bombButton = KeyCode.Mouse1; //string value of the key that must be pressed to bomb.
+    public KeyCode saveButton = KeyCode.F5;
+    public KeyCode loadButton = KeyCode.F6;
 
     public Rigidbody rb;
 
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
             shootBullet();
         }
 
+        if (Input.GetKeyDown(saveButton)) savePlayer();
+        if (Input.GetKeyDown(loadButton)) loadPlayer();
     }
 
     private void FixedUpdate()
@@ -93,5 +97,23 @@ public class PlayerController : MonoBehaviour
             healthBar.setHealth(currentHealth);
         }
         
+    }
+
+
+    //Save and Load behaviour
+    public void savePlayer()
+    {
+        SaveSystem.savePlayer(this);
+    }
+
+    public void loadPlayer()
+    {
+        PlayerData data = SaveSystem.loadPlayer();
+
+        maxHealth = data.maxHealth;
+        currentHealth = data.currentHealth;
+        lives = data.lives;
+
+        transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
     }
 }

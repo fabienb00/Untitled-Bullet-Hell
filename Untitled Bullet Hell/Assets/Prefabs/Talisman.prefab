@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1831016442922653832}
   - component: {fileID: 9089011656461428966}
   - component: {fileID: 972481406}
-  - component: {fileID: 972481407}
+  - component: {fileID: 1241907025943543401}
   m_Layer: 0
   m_Name: Talisman
-  m_TagString: Bullet
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &972481407
+--- !u!114 &1241907025943543401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,8 +122,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2142940587171932923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783397f3448ab6b4dbb6bab72e73fae9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3794f94e744de1443825f0dfc8ca79f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+  damage: 25
   rb: {fileID: 0}
+  damage: -1

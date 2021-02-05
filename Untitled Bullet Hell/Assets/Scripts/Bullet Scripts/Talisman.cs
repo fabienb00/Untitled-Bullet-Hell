@@ -5,23 +5,14 @@ using static Bullet;
 
 public class Talisman : Bullet
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int damage = -1;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Enemy")
         {
-
+            other.gameObject.GetComponent<EnemyPatternHandler>().changeHealth(damage);
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

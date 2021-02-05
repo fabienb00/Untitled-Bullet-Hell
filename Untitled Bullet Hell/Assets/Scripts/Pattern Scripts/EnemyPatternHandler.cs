@@ -11,7 +11,7 @@ public class EnemyPatternHandler : MonoBehaviour
     private int currentPattern = -1;
     public int[] healthThreshHolds;
 
-    public int maxHealth;
+    public int maxHealth = 200;
     private int currentHealth;
 
 
@@ -42,6 +42,7 @@ public class EnemyPatternHandler : MonoBehaviour
     public void changeHealth(int amount)
     {
         currentHealth += amount;
+        Debug.Log(currentHealth);
         if(currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;
